@@ -211,6 +211,34 @@ list3[3] = "benrobo"
 # print(list3, end="\n") # [1, 2, 3, 'benrobo', 5]
 # print(list1, end="\n") # [1, 2, 3, 4, 5]
 
+# Another way to make a copy is to use the built-in method list().
 
+list4 = list(list1)
 
+list4[3] = "benrobo"
 
+# print(list4, end="\n") # [1, 2, 3, 'benrobo', 5]
+# print(list1, end="\n") # [1, 2, 3, 4, 5]
+
+# Join Two Lists
+
+# There are several ways to join, or concatenate, two or more lists in Python. One of the easiest ways are by using the + operator.
+
+# 1 using " + " operator
+
+l1 = [1,2,3,45]
+l2 = ['a','b', 'c']
+
+# print(l1 + l2) # [1, 2, 3, 45, 'a', 'b', 'c']
+
+# 2 using "for loop" operator
+
+# for x in l2:
+    # l1.append(x)
+
+# print(l1)
+
+# Or you can use the extend() method, which purpose is to add elements from one list to another list:
+
+l1.extend(l2)
+print(l1)
