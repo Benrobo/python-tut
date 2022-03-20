@@ -65,4 +65,26 @@ a >>= 1
 
 # print( "name" == 23 or "name" == "name" )
 
+#  NOT :- Reverse the result, returns False if the result is true
 
+# print(not(10 < 5 and 20 < 10))
+
+# Identity Operators :- Identity operators are used to compare the objects, not if they are equal, but if they are actually the same object, with the same memory location:
+
+# IS :- Returns True if both variables are the same object
+
+# print(a is b)  # returns True case int == int
+
+# IS NOT :- Returns True if both variables are not the same object
+
+# print(a is not a) # returns false cause int == int which is true, and the opposite of True is false
+
+# Membership Operators
+
+# IN :- Returns True if a sequence with the specified value is present in the object
+
+# print("ben" in "benrobo") # return True cause "ben" is present
+
+# NOT IN :- Returns True if a sequence with the specified value is not present in the object
+
+# print("name" not in "benrobo") # return True cause "name" is not present
