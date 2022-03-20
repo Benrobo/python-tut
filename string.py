@@ -92,23 +92,83 @@ a = u"unicode string"
 
 # STRINGS METHODS
 
-# Capitalize
+# Capitalize :- Return a copy of the string with its first character capitalized and the rest lowercased.
 
-a = "string methods"
+a = "string methods   "
 
 b = a.capitalize()
 
 # print(b)
 
-# Uppar :- change the string 
+# Uppar :- change the string to an uppecrcase
 
 b = a.upper()
 
+# print(b)
+
+# LOWERCASE :- change the string to lowercase
+
+b = a.lower()
+
+# STRIP :- remove white space
+
+b = a.strip()
+
+# print(f"'{b}'")
+
+# REPLACE :- replaces a string with another string:
+
+b = a.replace("string", "ben")
+
+# print(b)
+
+
+# SPLIT :- convert a string to a list or an array using the split("seperator")
+
+b = "welcome, ben".split(',')
+
+# print(b)
+
+# ENCODE :- Return an encoded version of the string as a bytes object
+
+b = "benrobo".encode(encoding="utf-8")
+
+# print(b)
+
+# Title :- returns all title case of the string
+
+b = "welcome to python".title()
+
+# print(b) 
+
+
+# ESCAPE CHARACTER
+
+# To insert characters that are illegal in a string, use an escape character.
+
+# An escape character is a backslash \ followed by the character you want to insert.
+
+# An example of an illegal character is a double quote inside a string that is surrounded by double quotes:
+
+
+sent = "We are the so-called \"Vikings\" from the north."
+
+# print(sent)
+
+
+#  VALIDATE STRINGS
+    
+# isdigit() :- check if a string is an interger
+# islower() :- check if a string is lowercase
+
+b = a.isdigit() # False or True
+c = a.islower() # False or True
+
+# print(c)
+
+# JOIN :- Return a string which is the concatenation of the strings in iterable
+
+b = "welcome ben".join("-")
+
 print(b)
-
-
-
-
-
-
  
