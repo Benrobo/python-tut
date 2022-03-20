@@ -92,17 +92,37 @@ ndict3 = dict(thisdict)
 keys = []
 val = []
 
-for k in ndict3:
-    keys.append(k)
-    val.append(ndict3[k])
+# for k in ndict3:
+#     keys.append(k)
+#     val.append(ndict3[k])
 
-print(keys)
-print(val)
+# print(keys)
+# print(val)
+
+# Using item() methos
+
+# for k, v in ndict3.items():
+#     print(k,v, end="\n") # this would print both the key and value
+
+# Creating Custom dictionary
+
+cdict = dict([("name", "benrobo"), ("age", 20)])
+
+# print(cdict) # {'name': 'benrobo', 'age': 20}
 
 
+# Loop Through two different sequence at same time using the zip() function.
 
+# zip(*iterables)
 
+questions = ['name', 'quest', 'favorite color']
+answers = ['lancelot', 'the holy grail', 'blue']
 
+# for q, a in zip(questions, answers):
+#     # print(q) # this would produce a tuple
+#     print(f"""
+#         What is your {q} : {a}      
+#     """)
 
 
 
