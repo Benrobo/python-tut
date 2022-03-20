@@ -87,4 +87,4 @@ a >>= 1
 
 # NOT IN :- Returns True if a sequence with the specified value is not present in the object
 
-# print("name" not in "benrobo") # return True cause "name" is not present
+print("name" not in "benrobo") # return True cause "name" is not present
