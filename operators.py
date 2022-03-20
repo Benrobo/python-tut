@@ -62,3 +62,7 @@ a >>= 1
 # print( "name" == 23 and "name" == "name" )
 
 # OR :- Returns True if one of the statements is true
+
+# print( "name" == 23 or "name" == "name" )
+
+
