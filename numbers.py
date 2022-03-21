@@ -36,5 +36,10 @@ del y
 """
 
 newx =  randrange(12) # x**y
+
+a = [-4,-3,-2,-1,0,1,2,3,4]
+
+x = [abs(i) for i in a]
+print(x) # [4, 3, 2, 1, 0, 1, 2, 3, 4] removes all negative numbers
  
 print(newx)
