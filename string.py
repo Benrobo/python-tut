@@ -171,4 +171,12 @@ c = a.islower() # False or True
 b = "welcome ben".join("-")
 
 print(b)
- 
+
+
+# Get how many times a word appear within a string using the count() string method
+
+sentense = "I love programming, I love computing"
+
+count = sentense.count("love")
+
+print(count)
