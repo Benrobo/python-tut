@@ -3,7 +3,7 @@ from datetime import datetime as date
 import time
 import os
 import json
-from globalVar import database as dbFile
+from helpers.globalVar import database as dbFile
 
 def listAllCustomers():
     sendData = {}

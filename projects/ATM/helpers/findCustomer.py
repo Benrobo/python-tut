@@ -7,6 +7,8 @@ from globalVar import database as dbFile
 
 # Find customer based on accountNumber
 
+print(dbFile)
+
 def findCustomer(acctNumber):
     sendData = {}
     rowCount = 0

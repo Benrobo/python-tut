@@ -3,13 +3,13 @@ from datetime import datetime as date
 import time
 import os
 import json
-from globalVar import database as dbFile
-from findCustomer import findCustomer
-from findCustomer import findCustomerPhonenumber as findCusNumber
-from genId import genId
-from genAcctNumber import generateAccountNumber as genAcctNum
-from formatDate import formatDate
-from genPin import generatePin
+from helpers.globalVar import database as dbFile
+from helpers.findCustomer import findCustomer
+from helpers.findCustomer import findCustomerPhonenumber as findCusNumber
+from helpers.genId import genId
+from helpers.genAcctNumber import generateAccountNumber as genAcctNum
+from helpers.formatDate import formatDate
+from helpers.genPin import generatePin
 
 def createAccount(payload):
     sendData = {}

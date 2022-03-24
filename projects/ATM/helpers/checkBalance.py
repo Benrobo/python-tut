@@ -3,9 +3,9 @@ from datetime import datetime as date
 import time
 import os
 import json
-from globalVar import database as dbFile
-from findCustomer import findCustomer
-from findCustomer import findCustomerPhonenumber as findCusNumber
+from helpers.globalVar import database as dbFile
+from helpers.findCustomer import findCustomer
+from helpers.findCustomer import findCustomerPhonenumber as findCusNumber
 
 def checkAccountBalance(acctNumber, pin=""):
     sendData = {}
