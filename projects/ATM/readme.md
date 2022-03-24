@@ -10,8 +10,8 @@ This is a fully automated bank ATM machine built using python. A cli base applic
 5. [x] Check account balance
 6. [x] Change Pin.
 7. [x] Transfer money from your account to other account.
-8. [ ] Delete bank account
-9. [ ] Displays all customer account 
+8. [x] Delete bank account
+9. [x] Displays all customer account 
 
 
 ## Basic Customers Info Schema
