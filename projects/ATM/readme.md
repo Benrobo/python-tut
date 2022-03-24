@@ -7,10 +7,10 @@ This is a fully automated bank ATM machine built using python. A cli base applic
 2. [ ] Verify acccount
 3. [x] Generate customer Pin code
 4. [x] Generate bank account number.
-5. [ ] Redraw Cash
+5. [x] Redraw Cash
 6. [ ] Check account balance
-7. [ ] Change Pin.
-8. [ ] Transfer money from your account to other account.
+7. [x] Change Pin.
+8. [x] Transfer money from your account to other account.
 9. [ ] Delete bank account
 10. [ ] Displays all customer account 
 

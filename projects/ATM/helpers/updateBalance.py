@@ -22,10 +22,6 @@ def updateCustomerBalance(acctNumber="", cash=""):
         sendData["message"] = "expecting current 'cash' balance but got none"
         return sendData
     
-    # get current directory
-    currdir = os.getcwd()
-    dbFile = os.path.join(currdir, "projects", "ATM", "db.json")
-    
     # check if the pat5h is valid
     
     if os.path.exists(dbFile) == False:

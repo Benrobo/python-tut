@@ -7,78 +7,83 @@ from globalVar import database as dbFile
 from findCustomer import findCustomer
 from findCustomer import findCustomerPhonenumber as findCusNumber
 
-def redrawCash(acctNumber, cash=""):
+def redrawCash(acctNumber, amount=""):
     sendData = {}
     
-    # verify payload
-    payloadLength = len(list(payload))
-    if payloadLength == 0:
+    if acctNumber == None or acctNumber == "":
         sendData["error"] = True
-        sendData["message"] = "expected a valid payload but got none"
+        sendData["message"] = "expecting 'acctNumber' but got none"
         return sendData
     
-    if payloadLength > 0:
-        # customer data
-        phonenumber = payload["phonenumber"]
-        dob = payload["dob"]
-        fullname = payload["fullname"]
+    if amount == None or amount == "":
+        sendData["error"] = True
+        sendData["message"] = "expecting current 'amount' balance but got none"
+        return sendData
+    
+    if os.path.exists(dbFile) == False:
+        sendData["error"] = True
+        sendData["message"] = "database file doesnt exist: "+ dbFile
+        return sendData
+    
+    # Check if customer exist in db with that account number
+    check = findCustomer(acctNumber)
+    
+    if check["error"] == True:
+        sendData["error"] = False
+        sendData["message"] = check["message"]
+        return sendData
+    
+    elif check["error"] == False and check["rowCount"] == 0:
+        sendData["error"] = True
+        sendData["message"] = "No customer found with this account number"
+        return sendData
+    
+    try:
+        f = open(dbFile, "r")
+        dbdata = f.read()
+        result = json.loads(dbdata)
+        customer = result['customers']
         
-        # check if customer with that phonenumber exist
-        check = findCusNumber(phonenumber)
         
-        if check["error"] == True:
-            sendData["error"] = False
-            sendData["message"] = check["message"]
-            return sendData
-        
-        elif check["error"] == False and check["rowCount"] == 1:
-            sendData["error"] = True
-            sendData["message"] = "Customer with that phone number already exist"
-            return sendData
-        
-        try:
-            f = open(dbFile, "r")
-            dbdata = f.read()
-            result = json.loads(dbdata)
-            customer = result['customers']
-            
-            newcustomer = {
-                "id": genId(),
-                "name": fullname,
-                "phone_number": phonenumber,
-                "DOB": dob,
-                "account_number": genAcctNum(),
-                "pin": generatePin(),
-                "cash": "0",
-                "joined": formatDate()
-            }
-            
-            customer.append(newcustomer)
+        for index, users in enumerate(customer):
+            if acctNumber == users["account_number"]:
+                currentBal = int(users["cash"])
+                mainAmount = int(amount)
                 
-            # update file database
-            fo = open(dbFile, "w")
-            fo.write(json.dumps(result))
-            fo.close()
+                if mainAmount > currentBal:
+                    
+                    sendData["error"] = True
+                    sendData["message"] = "Insufficient Balance: {}".format(currentBal)
+                    return sendData
+
+                newCurrentBalance = (currentBal-mainAmount)
+                users["cash"] = newCurrentBalance
+                
+                # update file database
+                fo = open(dbFile, "w")
+                fo.write(json.dumps(result))
+                fo.close()
+                
+                formatedData = {
+                    "acct_name": users["name"],
+                    "acct_number": users["account_number"],
+                    "amount_redraw": mainAmount,
+                    "current_balance": newCurrentBalance
+                }
+                
+                sendData["error"] = False
+                sendData["message"] = "Transaction was successfull"
+                sendData["data"] = formatedData                         
+                return sendData
+    except:
+        sendData["error"] = True
+        sendData["message"] = "Something went wrong updating customer balance"
+        print("")
+        return sendData
+
             
-            sendData["error"] = False
-            sendData["message"] = "Account created"
-            sendData["data"] = newcustomer
-            return sendData
 
-        except:
-            sendData["error"] = True
-            sendData["message"] = "Something went wrong creating account."
-            print("")
-            return sendData
-            
-
-# payload = {
-#     "fullname": "Mark Brad",
-#     "dob": "11/03/2002",
-#     "phonenumber": "08034209681"
-# }
-
-# print(createAccount(payload))
+print(redrawCash("544226559", "17300"))
         
     
     
