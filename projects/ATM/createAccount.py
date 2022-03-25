@@ -1,15 +1,21 @@
+import sys
+import os
 import random
 from datetime import datetime as date
 import time
-import os
 import json
-from helpers.globalVar import database as dbFile
-from helpers.findCustomer import findCustomer
-from helpers.findCustomer import findCustomerPhonenumber as findCusNumber
-from helpers.genId import genId
-from helpers.genAcctNumber import generateAccountNumber as genAcctNum
-from helpers.formatDate import formatDate
-from helpers.genPin import generatePin
+from findCustomer import findCustomer
+from findCustomer import findCustomerPhonenumber as findCusNumber
+from genId import genId
+from genAcctNumber import generateAccountNumber as genAcctNum
+from formatDate import formatDate
+from genPin import generatePin
+
+# Dbfile 
+currdir = os.getcwd()
+dbFile = os.path.join(currdir, "db.json")
+
+# print(dbFile)
 
 def createAccount(payload):
     sendData = {}
@@ -76,11 +82,11 @@ def createAccount(payload):
             return sendData
             
 
-# payload = {
-#     "fullname": "Mark Brad",
-#     "dob": "11/03/2002",
-#     "phonenumber": "08034209681"
-# }
+payload = {
+    "fullname": "Mark Brad",
+    "dob": "11/03/2002",
+    "phonenumber": "07034209681"
+}
 
 # print(createAccount(payload))
         

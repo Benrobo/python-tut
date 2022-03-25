@@ -3,45 +3,18 @@ from datetime import datetime as date
 import time
 import os
 import json
-from helpers.findCustomer import findCustomer
-from helpers.globalVar import database as dbFile
+from findCustomer import findCustomer
+# from globalVar import database as dbFile
 
-# Create file
+currdir = os.getcwd()
+dbFile = os.path.join(currdir,"db.json")
 
-def createFile(filename):
-    sendData = {}
-    
-    if filename == None or filename == "":
-        sendData["error"] = True
-        sendData["message"] = "Failed to create file, filename isnt provided"
-        return sendData
-    
-    # get current directory
-    currdir = os.getcwd()
-    baseDir = os.path.join(currdir, "projects", "ATM")
-    filedir = os.path.join(currdir, "projects", "ATM", filename)
-    
-    # check if the pat5h is valid
-    
-    if os.path.exists(baseDir) == False:
-        sendData["error"] = True
-        sendData["message"] = "Failed to create file, path doest exist: "+ baseDir
-        return sendData
-    
-    # create file
-    try:
-        f = open(filedir, "a")
-        sendData["error"] = False
-        sendData["message"] = f"{filename} has been created"
-        return sendData
-    except:
-        sendData["error"] = True
-        sendData["message"] = "Something went wrong creating file"
-        print("")
-        return sendData
-    
+# for test purpose below 
+#####################################
+# dbFile = os.path.join(currdir, "projects", "ATM","db.json")
+#####################################
 
-def updateCustomerPin(acctNumber="", pin=""):
+def updateCustomerPin(acctNumber="", pin="", newpin=""):
     sendData = {}
     
     if acctNumber == None or acctNumber == "":
@@ -54,10 +27,11 @@ def updateCustomerPin(acctNumber="", pin=""):
         sendData["message"] = "expecting 'pin' but got none"
         return sendData
     
-    # get current directory
-    currdir = os.getcwd()
-    dbFile = os.path.join(currdir, "projects", "ATM", "db.json")
-    
+    if newpin == None or newpin == "":
+        sendData["error"] = True
+        sendData["message"] = "expecting 'newpin' but got none"
+        return sendData
+
     # check if the pat5h is valid
     
     if os.path.exists(dbFile) == False:
@@ -72,7 +46,7 @@ def updateCustomerPin(acctNumber="", pin=""):
         return check["message"]
     
     elif check["error"] == False and check["rowCount"] == 0:
-        sendData["error"] = False
+        sendData["error"] = True
         sendData["message"] = "No customer found with this account number"
         return sendData
     
@@ -85,11 +59,17 @@ def updateCustomerPin(acctNumber="", pin=""):
         
         for index, users in enumerate(customer):
             if users["account_number"] == acctNumber:
-                users["pin"] = pin
-        
+                # validate pin
+                if users["pin"] != pin:
+                    sendData["error"] = True
+                    sendData["message"] = "You entered wrong old pin: {}".format(pin) 
+                    return sendData
+                
+                users["pin"] = newpin
+                
         # update file database
         overideData = {
-            "name": result["bank_name"],
+            "name": result["name"],
             "customers": customer
         }
         fo = open(dbFile, "w")
@@ -97,7 +77,7 @@ def updateCustomerPin(acctNumber="", pin=""):
         fo.close()
         
         sendData["error"] = False
-        sendData["message"] = "Customer Pin updated successfullt"
+        sendData["message"] = "Pin updated successfullt"
         return sendData
 
     except:
@@ -107,4 +87,4 @@ def updateCustomerPin(acctNumber="", pin=""):
         return sendData
   
 
-print(updateCustomerPin("2265567117", "2222"))
+# print(updateCustomerPin("2265567117", "2222", "3344"))

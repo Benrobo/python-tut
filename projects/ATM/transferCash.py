@@ -3,9 +3,9 @@ from datetime import datetime as date
 import time
 import os
 import json
-from helpers.globalVar import database as dbFile
-from helpers.findCustomer import findCustomer
-from helpers.findCustomer import findCustomerPhonenumber as findCusNumber
+from globalVar import database as dbFile
+from findCustomer import findCustomer
+from findCustomer import findCustomerPhonenumber as findCusNumber
 
 def transferCash(senderAcctNumber, recieverAcctNumber, amount=""):
     sendData = {}
@@ -97,7 +97,7 @@ def transferCash(senderAcctNumber, recieverAcctNumber, amount=""):
                     "acct_number_from": senderAcct["account_number"],
                     "acct_number_to": recieverAcct["account_number"],
                     "amount_transfer": mainAmount,
-                    "current_balance": newCurrentBalance
+                    "current_balance": senderAcct['cash']
                 }
                 
                 sendData["error"] = False
@@ -112,7 +112,7 @@ def transferCash(senderAcctNumber, recieverAcctNumber, amount=""):
 
             
 
-print(transferCash("544226559", "0023453509911", "16797300"))
+# print(transferCash("544226559", "0023453509911", "16797300"))
         
     
     

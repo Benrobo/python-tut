@@ -3,15 +3,13 @@ from datetime import datetime as date
 import time
 import os
 import json
-from helpers.globalVar import database as dbFile
-from helpers.findCustomer import findCustomer
-from helpers.findCustomer import findCustomerPhonenumber as findCusNumber
+from globalVar import database as dbFile
+from findCustomer import findCustomer
+from findCustomer import findCustomerPhonenumber as findCusNumber
 
-def deleteBankAccount(acctNumber, pin=""):
+def redrawCash(acctNumber, pin="", amount=""):
     sendData = {}
-    newCustomerData = {}
-    newcustomersStore = []
-                    
+    
     if acctNumber == None or acctNumber == "":
         sendData["error"] = True
         sendData["message"] = "expecting 'acctNumber' but got none"
@@ -19,7 +17,12 @@ def deleteBankAccount(acctNumber, pin=""):
     
     if pin == None or pin == "":
         sendData["error"] = True
-        sendData["message"] = "expecting current 'pin' balance but got none"
+        sendData["message"] = "expecting 'pin' but got none"
+        return sendData
+    
+    if amount == None or amount == "":
+        sendData["error"] = True
+        sendData["message"] = "expecting current 'amount' balance but got none"
         return sendData
     
     if os.path.exists(dbFile) == False:
@@ -46,28 +49,42 @@ def deleteBankAccount(acctNumber, pin=""):
         result = json.loads(dbdata)
         customer = result['customers']
         
+        
         for index, users in enumerate(customer):
             if acctNumber == users["account_number"]:
-                # compare pin
-                if pin != users["pin"]:
+                if users["pin"] != pin:
                     sendData["error"] = True
-                    sendData["message"] = "Invalid Pin entered"
+                    sendData["message"] = "Pin isnt correct: {}".format(pin)
                     return sendData
                 
-                for index, customers in enumerate(customer):
-                    # return customers whose account isnt equal to the one provided
-                    if acctNumber != customers["account_number"]:
-                        newcustomersStore.append(customers)
+                currentBal = int(users["cash"])
+                mainAmount = int(amount)
                 
-                newCustomerData["name"] = result["name"]
-                newCustomerData["customers"] = newcustomersStore
                 
+                if mainAmount > currentBal:
+                    
+                    sendData["error"] = True
+                    sendData["message"] = "Insufficient Balance: {}".format(currentBal)
+                    return sendData
+
+                newCurrentBalance = (currentBal-mainAmount)
+                users["cash"] = newCurrentBalance
+                
+                # update file database
                 fo = open(dbFile, "w")
-                fo.write(json.dumps(newCustomerData))
+                fo.write(json.dumps(result))
                 fo.close()
-            
+                
+                formatedData = {
+                    "acct_name": users["name"],
+                    "acct_number": users["account_number"],
+                    "amount_withdrawn": mainAmount,
+                    "current_balance": newCurrentBalance
+                }
+                
                 sendData["error"] = False
-                sendData["message"] = "Account Deleted Successfully"
+                sendData["message"] = "Transaction was successfull"
+                sendData["data"] = formatedData                         
                 return sendData
     except:
         sendData["error"] = True
@@ -77,7 +94,7 @@ def deleteBankAccount(acctNumber, pin=""):
 
             
 
-print(deleteBankAccount("544226559", "1234"))
+print(redrawCash("544226559", "17300"))
         
     
     

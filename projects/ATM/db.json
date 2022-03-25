@@ -8,28 +8,8 @@
             "DOB": "12/02/2002",
             "pin": "2222",
             "account_number": "2265567117",
-            "cash": "39000",
+            "cash": 38990,
             "joined": "Feb 02, 2022"
-        },
-        {
-            "id": "dsfgfert6w45et",
-            "name": "John Doe",
-            "phone_number": "08080815951",
-            "DOB": "12/02/2002",
-            "pin": "1234",
-            "account_number": "544226559",
-            "cash": 65400,
-            "joined": "Feb 02, 2022"
-        },
-        {
-            "id": "#2@)1hb!(4^",
-            "name": "Mark Brad",
-            "phone_number": "08034209681",
-            "DOB": "11/03/2002",
-            "account_number": "0023453509911",
-            "pin": "3533",
-            "cash": 17300,
-            "joined": "March 24, 2022 06:08 AM"
         }
     ]
 }

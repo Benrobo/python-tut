@@ -1,14 +1,20 @@
+import sys
 import random
 from datetime import datetime as date
 import time
 import os
 import json
-from globalVar import database as dbFile
+
+# Database path
+currdir = os.getcwd()
+dbFile = os.path.join(currdir,"db.json")
+
+# for test purpose below 
+#####################################
+    # dbFile = os.path.join(currdir, "projects", "ATM","db.json")
+#####################################
 
 # Find customer based on accountNumber
-
-print(dbFile)
-
 def findCustomer(acctNumber):
     sendData = {}
     rowCount = 0
@@ -18,8 +24,6 @@ def findCustomer(acctNumber):
         sendData["message"] = "failed to find customer, expecting 'acctNumber' but got none"
         return sendData
 
-    # dbFile = os.path.join(currdir, "projects", "ATM", "db.json")
-    
     # check if the path is valid
     
     if os.path.exists(dbFile) == False:
