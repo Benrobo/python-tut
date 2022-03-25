@@ -94,7 +94,6 @@ def redrawCash(acctNumber, pin="", amount=""):
 
             
 
-print(redrawCash("544226559", "17300"))
         
     
     

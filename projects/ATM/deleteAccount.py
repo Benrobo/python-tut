@@ -77,7 +77,6 @@ def deleteBankAccount(acctNumber, pin=""):
 
             
 
-print(deleteBankAccount("544226559", "1234"))
         
     
     

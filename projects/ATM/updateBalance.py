@@ -75,4 +75,3 @@ def updateCustomerBalance(acctNumber="", cash=""):
         print("")
         return sendData
   
-print(updateCustomerBalance("544226559", "45000"))

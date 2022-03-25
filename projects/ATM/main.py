@@ -23,7 +23,7 @@ class BATM:
         
         --help, -h : list all common options for interacting witth this ATM
         
-        --start, -s : Begin the ATM operations.
+        --start, -s : Begin the ATM operations. or 
     """
     bankoptions = """
         To start, choose from the options below.
@@ -386,6 +386,8 @@ class BATM:
             cliArgs = sys.argv[1]
             
             if cliArgs == "--start" or cliArgs == "-s":
+                return self.start()
+            elif cliArgs == "--help" or cliArgs == "-h":
                 return self.start()
             elif cliArgs == str(1):
                 pass
