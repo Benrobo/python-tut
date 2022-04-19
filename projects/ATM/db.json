@@ -1,15 +1,1 @@
-{
-    "name": "Benrobo-CLI",
-    "customers": [
-        {
-            "id": "wedfwe34523",
-            "name": "Benrobo",
-            "phone_number": "07070712296",
-            "DOB": "12/02/2002",
-            "pin": "2222",
-            "account_number": "2265567117",
-            "cash": 38990,
-            "joined": "Feb 02, 2022"
-        }
-    ]
-}
+{"name": "Benrobo-CLI", "customers": [{"id": "wedfwe34523", "name": "Benrobo", "phone_number": "07070712296", "DOB": "12/02/2002", "pin": "2222", "account_number": "2265567117", "cash": 36990, "joined": "Feb 02, 2022"}]}
