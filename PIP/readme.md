@@ -172,3 +172,37 @@ Before you uninstall a package, make sure to run the show command for that packa
     Requires: certifi, idna, charset-normalizer, urllib3
     Required-by:
 ```
+
+Notice the last two fields, Requires and Required-by. The show command tells you that requests requires certifi, idna, charset-normalizer, and urllib3. You probably want to uninstall those too. Notice that requests isn’t required by any other package. So it’s safe to uninstall it.
+
+You should run the show command against all of the requests dependencies to ensure that no other libraries also depend on them. Once you understand the dependency order of the packages that you want to uninstall, then you can remove them using the uninstall command:
+
+```bash
+    (newvenv) C:\> python -m pip uninstall certifi
+```
+
+The uninstall command shows you the files that will be removed and asks for confirmation. If you’re sure that you want to remove the package because you’ve checked its dependencies and know that nothing else is using it, then you can pass a -y switch to suppress the file list and confirmation dialog:
+
+```bash
+    (newvenv) C:\> python -m pip uninstall urllib3 -y
+```
+
+Here you uninstall urllib3. Using the -y switch, you suppress the confirmation dialog asking you if you want to uninstall this package.
+
+In a single call, you can specify all the packages that you want to uninstall:
+
+```bash
+    (newvenv) C:\> python -m pip uninstall -y charset-normalizer idna requests
+```
+
+You can pass in multiple packages to the pip uninstall command. If you didn’t add any additional switches, then you’d need to confirm uninstalling each package. By passing the -y switch, you can uninstall them all without any confirmation dialog.
+
+You can also uninstall all the packages listed in a requirements file by providing the -r <requirements file> option. This command will prompt a confirmation request for each package, but you can suppress it with the -y switch:
+
+```bash
+    (venv) C:\> python -m pip uninstall -r requirements.txt -y
+```
+
+Remember to always check the dependencies of packages that you want to uninstall. You probably want to uninstall all dependencies, but uninstalling a package used by others will break your working environment. In consequence, your project may not work correctly anymore.
+
+If you’re working in a virtual environment, it can be less work to just create a new virtual environment. Then you can install the packages that you need instead of trying to uninstall the packages that you don’t need. However, pip uninstall can be really helpful when you need to uninstall a package from your system Python installation. Using pip uninstall is a good way to declutter your system if you accidentally install a package system-wide.
